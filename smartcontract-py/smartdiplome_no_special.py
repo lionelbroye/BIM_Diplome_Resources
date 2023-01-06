@@ -14,7 +14,7 @@ class SmartDiplome (sp.Contract):
             legalText05 = "Vu le proces-verbal du jury attestant que PRENOM_candidat_e NOM_candidat_e a soutenu le DATE_smartdiplome des travaux de recherche de niveau 3e cycle portant sur : SUJET_recherche, prepares au sein de l unite de recherche ECOLAB   ",
             legalText06 = "Vu la deliberation du jury, compose de PRENOM_president_e NOM_president_e    PRENOM_rapporteur_trice NOM_rapporteur_trice    PRENOM_membreA NOM_membreA    PRENOM_membreB NOM_membreB    PRENOM_membreC NOM_membreC    ",
             legalText07 = "Le Diplome Superieur de Recherche en Design de l ecole Superieure d Art et de Design d Orleans est delivre a PRENOM_candidat_e NOM_candidat_e    ",
-            legalText08 = "ne-e le DATEDENAISSANCE_candidat_e ",
+            legalText08 = "ne le DATEDENAISSANCE_candidat_e ",
             legalText09 = "a LIEUDENAISSANCE_candidat_e",
             legalText10 = "Au titre de l annee DEBUT_annee - FIN_annee",
             legalText11 = "Fait a Orleans le DATE_edition",
