@@ -1,3 +1,4 @@
+# adresse du contrat dans le ghostnet : KT1HLk6LmWmMxX8VA2kumNkgPqvjojgXyA29
 # J importe la librairie smartpy, elle sera nommee sp 
 import smartpy as sp
 
