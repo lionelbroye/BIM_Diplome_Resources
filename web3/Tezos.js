@@ -158,14 +158,14 @@ class TezosNetWork
     async LoadContract(contractaddr)
     {
         this.contract =  await this.module.contract.at(contractaddr);
-        this.contractstorage = await this.contract.storage();
-        console.log( this.contractstorage);
+        this.contract.storage = await this.contract.storage();
+        console.log( this.contract.storage);
         console.log(this.contract);
         // Build storage map
-        if ( typeof this.contractstorage.keyMap === 'undefined')
+        if ( typeof this.contract.storage.keyMap === 'undefined')
             return;
         this.storageMap = new Array();
-        for (const [key, value] of this.contractstorage.keyMap.entries()) 
+        for (const [key, value] of this.contract.storage.keyMap.entries()) 
         {
             console.log("Adding key " + value);
             this.storageMap.push(value);

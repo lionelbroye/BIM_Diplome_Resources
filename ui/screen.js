@@ -208,6 +208,46 @@ class Canvas
         _g.font = style + " "+fontsize+"px "+fontname;
         _g.fillText(text, x, y);
     }
+    
+    FillTextArrayInsideBox(text, box, color, fontname, fontsize, style)
+    {
+        var cx = box.x
+        var cy = box.y;
+        
+        for ( var i = 0 ; i < text.length ; i++ )
+        {
+            var cursorRes = this.FillTextLineInsideBox(text[i], box, color, fontname, fontsize, style)
+            box.y = cursorRes.y
+        }
+    }
+    FillTextLineInsideBox(textline, box, color, fontname, fontsize, style)
+    {
+        var _g = this.context;
+        _g.fillStyle = color;
+        _g.font = style + " "+fontsize+"px "+fontname;
+        
+        var splitText = textline.split(' ')
+        
+        var cursorx = box.x;
+        var cursory = box.y;
+        var measure;
+        for (var i = 0 ; i < splitText.length; i++)
+        {
+            _g.font = style + " "+fontsize+"px "+fontname;
+            var text2draw = splitText[i] + " "
+            measure =  _g.measureText(text2draw);
+            this.FillText(text2draw, cursorx, cursory, color, fontname, fontsize, style);
+            cursorx += measure.width
+            if ( cursorx > box.x + box.w)
+            {
+                cursory +=fontsize
+                cursorx = box.x
+            }
+            
+        }
+        return {x:cursorx, y: cursory + fontsize}
+        
+    }
     StrokeText(text, x, y, color, fontname, fontsize, style)
     {
         var _g = this.context;

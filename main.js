@@ -1,41 +1,41 @@
- 
+
 async function Boot()
 {
+    // Initialiser les 2 réseaux (Ethereum, Tezos)
     InitEthereumNetwork()
     InitTezosNetwork()
     
+    // Se connecter au réseau Tezos 'ghostnet'
     SwitchToTezosNetwork(nomdureseau='ghostnet')
     
+    // Charger en mémoire son smartcontract
     await Network.LoadContract(adresse='KT1HLk6LmWmMxX8VA2kumNkgPqvjojgXyA29')
     
-    console.log("[0] " + Network.contractstorage.legalText01)
+    // Je crée une nouvelle instance du smartdiplome à partir du contrat chargé en mémoire.
+    // SmartDiplome est une interface plus simple pour intérargir/lire avec le contrat
+    var mySmartDiplome = new SmartDiplome(Network.contract);
+
+    // Je charge l'historique des transactions du SmartDiplome
+    await mySmartDiplome.GetTransactionHistory()
     
-    var history = await Network.GetContractTransactionHistory('parameter,timestamp,gasUsed')
-    console.log(history)
-    var date = new Date(history[0].timestamp)
-    console.log(date)
+    // Ne pas continuer si l'historique de transaction est vide
+    if ( mySmartDiplome.history == null )
+        return;
     
-    var Grille = new VisualGrid()
-    Grille.SetGeneralDimension(x=0,y=0,w=500,h=500)
+    // Pour chaque transaction dans l'historique ....
+    var xCursor = 0
+    for (var txNumber = 0 ; txNumber < mySmartDiplome.history.length; txNumber++ )
+    {
+        // J'appelle une fonction qui crée automatique une grille et imprime les informations déjà parsé de cette transaction
+        mySmartDiplome.DebugCreateGridFromDiplomaTransaction( gridBox = new Box(xCursor,0,500,500), transactionNumber = txNumber)
+        
+        // J'augmente mon curseur de 550 pixel sur l'axe X pour éviter que les grilles se superposent
+        xCursor += 550
+    }
     
-    Grille.AddRow(
-        name="Hour",
-        rangeMin=0,
-        rangeMax=24,
-        granularity=1,
-        value=date.getHours(),
-        borderMargin=50
-    )
-     Grille.AddRow(
-        name="Minute",
-        rangeMin=0,
-        rangeMax=60,
-        granularity=1,
-        value=date.getMinutes(),
-        borderMargin=50
-    )
+   
     
-    Grille.UpdateRowData(nomligne="Age", 50)
+    
 }
 
 
