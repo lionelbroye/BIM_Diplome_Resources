@@ -83,7 +83,7 @@ class SmartDiplome
                 break;
             var cursorpos = index+keyword.length
             var val = ""
-            while ( true )
+            while ( cursorpos < text2parse.length )
             {
                 if  ( text2parse[cursorpos] == endtoken)
                     break;
