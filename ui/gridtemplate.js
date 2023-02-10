@@ -3,6 +3,7 @@ class VisualGrid
     constructor ()
     {
         this.Canvas = CreateCanvas(0,0,0,0);
+        
         this.Rows = new Array()
         this.borderWidth = 50;
         this.BackGroundColor = 'rgb(0,0,0)'
@@ -84,14 +85,17 @@ class VisualGrid
         // get width and height of the canvas
         var w = this.CanvasWidth;
         var h = this.CanvasHeight;
-        
+       
         // get row boxes ' dimension
         var boxDim = new Vector2(w-this.borderWidth*2,(h-this.borderWidth*2)/this.Rows.length)
         
         // drow dots as value representation of each rows
         var y = this.borderWidth;
+        var isFirst = true
+        var prevData = new Vector2()
         for (var i = 0 ; i < this.Rows.length; i++)
         {
+            var isFirstPoint = true
             var bx = this.borderWidth + this.Rows[i].borderWidth
             
             // Get number of vertical lines ( number of possible position in X-axis)
@@ -101,17 +105,32 @@ class VisualGrid
             var bspacing = (w-(this.borderWidth*2)-(this.Rows[i].borderWidth*2))/lineCount
             
             // Map row value to its specific vertical line position
-            var v = Math.abs(this.Rows[i].min - this.Rows[i].value)/this.Rows[i].granularity
             
-            // Compute the X-Axis position of the dot depeding of its line, including marging
-            var dotPosX = this.borderWidth+this.Rows[i].borderWidth+(bspacing*(v))
             
-            // Draw the dot with FillCircle method
-            this.Canvas.FillCircle(dotPosX, y+boxDim.y/2, 20, this.LineColor )
-            
+            // Gen line for all values in a row
+
+            for(var j = 0; j < this.Rows[i].value.length;j++){
+                var v = Math.abs(this.Rows[i].min - this.Rows[i].value[j])/this.Rows[i].granularity
+                var dotPosX = this.borderWidth+this.Rows[i].borderWidth+(bspacing*(v))
+                if(isFirstPoint){
+                    this.Canvas.FillCircle(dotPosX,y+40,10,this.LineColor)
+                    isFirstPoint = false
+                }
+            if(isFirst){
+                prevData.x = dotPosX
+                prevData.y = y+40
+                isFirst = false
+            }else{
+                this.Canvas.DrawLine(prevData.x,prevData.y,dotPosX,y+40,null,20)
+                this.Canvas.FillCircle(dotPosX,y+40,10,this.LineColor)
+                prevData.x = dotPosX
+                prevData.y =y+40
+            }
+            }
             // Increment Y-Axis cursor
             y+=boxDim.y
         } 
+       
         
         
     }
@@ -145,16 +164,16 @@ class VisualGrid
         }
         return -1
     }
-    AssignDataToRow(rowName, value)
+    AssignDataToRow(rowName, value, index)
     {
         var rowIndex = this.GetRowIndexFromName(rowName);
         if ( rowIndex == -1)
             return;
-        this.Rows[rowIndex].value = value;
+        this.Rows[rowIndex].value[index] = value;
     }
-    UpdateRowData(rowName, value)
+    UpdateRowData(rowName, value, index)
     {
-        this.AssignDataToRow(rowName, value)
+        this.AssignDataToRow(rowName, value,index)
         this.Draw()
     }
 }
