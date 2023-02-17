@@ -14,6 +14,14 @@ edskRhu5ubPrB83qZkGgMZ77jfTMaKC4NnxsArenpxB5FrLQNHnja8r3m8FvP5HDAGJpqHq7FL2Mbpqt
 
 ## Methods 
 
+## Tutos
+texte parsing
+https://drive.google.com/file/d/1XrQuqM2T4Hr1z0ZkspTAVGJ8TrERqRsU/view
+
+Web interface
+https://drive.google.com/file/d/1_VBZbMzZRiGlNq_pQLAoyuXYFfm8g7GQ/view
+
+
 ### Network methods
 
 | method name     | arguments                            | example                              | description                          |
