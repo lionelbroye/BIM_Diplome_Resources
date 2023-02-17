@@ -3,8 +3,12 @@
 </p>
 
 # Bim Diplome resources provisoires
+adresse provisoire
+https://bleuprofond.art/dip-demo/
+
 adresse du contrat provisoire
 KT1MPjuj2wdaoheV8zFxYFACRg6ecdtWASZr
+
 clef privé
 edskRhu5ubPrB83qZkGgMZ77jfTMaKC4NnxsArenpxB5FrLQNHnja8r3m8FvP5HDAGJpqHq7FL2MbpqtwK7qNL6tCYg7RrPabD
 
